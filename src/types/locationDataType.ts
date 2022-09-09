@@ -18,7 +18,7 @@ export interface Weather {
   wind: number;
 }
 
-export interface forecastWeather {
+export interface IDailyForecast {
   date: string;
   day: number;
   night: number;
@@ -28,5 +28,6 @@ export interface forecastWeather {
 
 export interface SelectedLocationWeatherTypes {
   current: Weather;
-  daily: forecastWeather[];
+  daily: IDailyForecast[];
+  hourly?: any[];
 }

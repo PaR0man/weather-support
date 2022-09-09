@@ -1,12 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Layout, Row, Spin } from 'antd';
-import { SelectedGraph } from './selectedGraph/SelectedGraph';
-import {
+import React, { FC, useEffect, useState } from "react";
+import { Layout, Row, Spin } from "antd";
+import { SelectedGraph } from "./selectedGraph/SelectedGraph";
+import type {
   LocationCoord,
   SelectedLocationWeatherTypes,
-} from '../types/locationDataType';
-import { SelectedLocationWeather } from './selectedLocationWeather/SelectedLocationWeather';
-import { fetchByСoord } from '../api/selectLocation';
+} from "../types/locationDataType";
+import { SelectedLocationWeather } from "./selectedLocationWeather/SelectedLocationWeather";
+import { fetchByСoord } from "../api/selectLocation";
 
 const { Content } = Layout;
 
@@ -33,7 +33,7 @@ export const Main: FC<MainProps> = ({
     if (data.message) {
       return setError(data.message);
     }
-    setError('');
+    setError("");
 
     setLocationData({
       current: {
@@ -62,11 +62,11 @@ export const Main: FC<MainProps> = ({
   }, [locationCoord]);
 
   return (
-    <Content className="content">
+    <Content className='content'>
       {error ? (
         <h1>{error}</h1>
       ) : (
-        <Row className="currentWeather">
+        <Row className='currentWeather'>
           <SelectedLocationWeather
             locationData={locationData}
             locationName={locationName}

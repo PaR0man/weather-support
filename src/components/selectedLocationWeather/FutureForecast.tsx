@@ -1,10 +1,10 @@
-import { Col, Row, Select } from 'antd';
-import React, { FC, useState } from 'react';
-import { forecastWeather } from '../../types/locationDataType';
-import { ForecastCard } from './ForecastCard';
+import { Col, Row, Select } from "antd";
+import { FC, useState } from "react";
+import type { IDailyForecast } from "../../types/locationDataType";
+import { ForecastCard } from "./ForecastCard";
 
 export interface FutureForecastProps {
-  forecast?: forecastWeather[];
+  forecast?: IDailyForecast[];
 }
 
 const { Option } = Select;
@@ -12,10 +12,10 @@ const { Option } = Select;
 export const FutureForecast: FC<FutureForecastProps> = ({ forecast }) => {
   const [dayCount, setDayCount] = useState<number>(1);
   return (
-    <div className="forecast">
-      <Row justify="center">
+    <div className='forecast'>
+      <Row justify='center'>
         <Select
-          className="forecastSelect"
+          className='forecastSelect'
           defaultValue={1}
           onChange={(value) => setDayCount(value)}
         >
@@ -24,7 +24,7 @@ export const FutureForecast: FC<FutureForecastProps> = ({ forecast }) => {
           <Option value={7}>Week</Option>
         </Select>
       </Row>
-      <Row className="forecastCards" justify="space-around">
+      <Row className='forecastCards' justify='space-around'>
         {forecast?.slice(0, dayCount).map((day, index) => (
           <Col key={day.date}>
             <ForecastCard day={day} isTomorrow={index === 0} />
