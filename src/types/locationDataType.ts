@@ -26,8 +26,13 @@ export interface IDailyForecast {
   icon: string;
 }
 
+export interface IHourlyForecast {
+  dt: number;
+  temp: number;
+}
+
 export interface SelectedLocationWeatherTypes {
   current: Weather;
   daily: IDailyForecast[];
-  hourly?: any[];
+  hourly: IHourlyForecast[];
 }

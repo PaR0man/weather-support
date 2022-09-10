@@ -1,12 +1,28 @@
-import { Col, Typography } from 'antd';
-import React, { FC } from 'react';
+import { Col, Typography } from "antd";
+import { FC } from "react";
+import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
+import type { IHourlyForecast } from "../../types/locationDataType";
 
 const { Title } = Typography;
 
-export const SelectedGraph: FC = () => {
+interface SelectedGraphData {
+  hourlyForecast?: IHourlyForecast[];
+}
+
+export const SelectedGraph: FC<SelectedGraphData> = ({ hourlyForecast }) => {
   return (
-    <Col span={12} className="selectedGraph">
+    <Col span={12} className='selectedGraph'>
       <Title level={1}>Location Graph</Title>
+      <ComposedChart
+        data={hourlyForecast?.slice(0, 12)}
+        width={600}
+        height={400}
+      >
+        <XAxis dataKey='dt' />
+        <YAxis dataKey='temp' />
+        <CartesianGrid stroke='#48484a' />
+        <Bar dataKey='temp' barSize={20} fill='#e96e50' />
+      </ComposedChart>
     </Col>
   );
 };

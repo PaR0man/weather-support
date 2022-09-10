@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { Layout, Row, Spin } from "antd";
 import { SelectedGraph } from "./selectedGraph/SelectedGraph";
 import type {
+  IHourlyForecast,
   LocationCoord,
   SelectedLocationWeatherTypes,
 } from "../types/locationDataType";
@@ -54,6 +55,12 @@ export const Main: FC<MainProps> = ({
           weather: day?.weather[0].main,
         };
       }),
+      hourly: data?.hourly.map((hour: IHourlyForecast) => {
+        return {
+          temp: hour.temp,
+          dt: new Date(hour.dt * 1000).getHours(),
+        };
+      }),
     });
   };
 
@@ -71,7 +78,7 @@ export const Main: FC<MainProps> = ({
             locationData={locationData}
             locationName={locationName}
           />
-          <SelectedGraph />
+          <SelectedGraph hourlyForecast={locationData?.hourly} />
         </Row>
       )}
     </Content>
