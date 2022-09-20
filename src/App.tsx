@@ -1,10 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
-import { Layout } from "antd";
-import { Footer } from "./components/Footer";
+import { FC, useEffect, useState } from "react";
 import { fetchByLocation } from "./api/selectLocation";
 import { LocationCoord } from "./types/locationDataType";
-import { Main } from "./components/Main";
-import { Head } from "./components/Head";
+import { ContentLayout } from "./components/layout";
 
 export const App: FC = () => {
   const [locationCoord, setLocationCoord] = useState<LocationCoord>({
@@ -46,16 +43,13 @@ export const App: FC = () => {
   }, [locationName]);
 
   return (
-    <Layout className='root'>
-      <Head setLocationName={setLocationName} />
-      <Main
-        locationCoord={locationCoord}
-        locationName={locationName}
-        error={error}
-        setError={setError}
-      />
-      <Footer />
-    </Layout>
+    <ContentLayout
+      locationName={locationName}
+      setLocationName={setLocationName}
+      locationCoord={locationCoord}
+      error={error}
+      setError={setError}
+    />
   );
 };
 

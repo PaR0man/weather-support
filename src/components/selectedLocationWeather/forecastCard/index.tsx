@@ -1,9 +1,9 @@
 import { Card, Descriptions } from "antd";
-import React, { FC } from "react";
-import { apiImageUrl } from "../../constants/api";
-import type { IDailyForecast } from "../../types/locationDataType";
-import { days } from "../../constants/weekDays";
-import weatherError from "../../assets/weatherError.png";
+import { FC } from "react";
+import { apiImageUrl } from "../../../constants/api";
+import { IDailyForecast } from "../../../types/locationDataType";
+import { days } from "../../../constants/weekDays";
+import weatherError from "../../../assets/weatherError.png";
 
 const { Item } = Descriptions;
 

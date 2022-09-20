@@ -1,9 +1,9 @@
-import { Col } from 'antd';
-import React, { FC } from 'react';
-import { SelectedLocationWeatherTypes } from '../../types/locationDataType';
-import { CurrentWeatherDetails } from './CurrentWeatherDetails';
-import { CurrentWeatherTitle } from './CurrentWeatherTitle';
-import { FutureForecast } from './FutureForecast';
+import { Col } from "antd";
+import { FC } from "react";
+import { SelectedLocationWeatherTypes } from "../../../types/locationDataType";
+import { CurrentWeatherDetails } from "../currentWeatherDetails";
+import { CurrentWeatherTitle } from "../currentWeatherTitle";
+import { FutureForecast } from "../futureForecast";
 
 export interface SelectedLocationProps {
   locationData?: SelectedLocationWeatherTypes;
@@ -15,7 +15,7 @@ export const SelectedLocationWeather: FC<SelectedLocationProps> = ({
   locationName,
 }) => {
   return (
-    <Col span={12} className="selectedCity">
+    <Col span={12} className='selectedCity'>
       <CurrentWeatherTitle
         name={locationName ? locationName : locationData?.current.timezone}
         icon={locationData?.current.icon}

@@ -1,7 +1,7 @@
-import { Row, Typography } from 'antd';
-import React, { FC } from 'react';
-import { apiImageUrl } from '../../constants/api';
-import weatherError from '../../assets/weatherError.png';
+import { Row, Typography } from "antd";
+import { FC } from "react";
+import { apiImageUrl } from "../../../constants/api";
+import weatherError from "../../../assets/weatherError.png";
 
 const { Title } = Typography;
 
@@ -16,14 +16,14 @@ export const CurrentWeatherTitle: FC<CurrentWeatherTitleProps> = ({
 }) => {
   return (
     <>
-      <Title level={1} className="location">
+      <Title level={1} className='location'>
         {name}
       </Title>
-      <Row justify="center">
+      <Row justify='center'>
         <img
           className='titleImage'
           src={icon ? `${apiImageUrl}${icon}@2x.png` : weatherError}
-          alt="Weather Icon"
+          alt='Weather Icon'
         />
       </Row>
     </>

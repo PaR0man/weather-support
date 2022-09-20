@@ -1,13 +1,13 @@
-import React, { FC, useEffect, useState } from "react";
-import { Layout, Row, Spin } from "antd";
-import { SelectedGraph } from "./selectedGraph/SelectedGraph";
-import type {
+import { FC, useEffect, useState } from "react";
+import { Layout, Row } from "antd";
+import { SelectedGraph } from "../../selectedGraph";
+import {
   IHourlyForecast,
   LocationCoord,
   SelectedLocationWeatherTypes,
-} from "../types/locationDataType";
-import { SelectedLocationWeather } from "./selectedLocationWeather/SelectedLocationWeather";
-import { fetchByСoord } from "../api/selectLocation";
+} from "../../../types/locationDataType";
+import { SelectedLocationWeather } from "../../selectedLocationWeather/selectedLocationWeather";
+import { fetchByСoord } from "../../../api/selectLocation";
 
 const { Content } = Layout;
 

@@ -1,7 +1,7 @@
 import { Col, Row, Select } from "antd";
 import { FC, useState } from "react";
-import type { IDailyForecast } from "../../types/locationDataType";
-import { ForecastCard } from "./ForecastCard";
+import  { IDailyForecast } from "../../../types/locationDataType";
+import { ForecastCard } from "../forecastCard";
 
 export interface FutureForecastProps {
   forecast?: IDailyForecast[];

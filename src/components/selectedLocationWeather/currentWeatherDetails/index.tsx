@@ -1,6 +1,6 @@
 import { Descriptions } from "antd";
-import React, { FC } from "react";
-import type { Weather } from "../../types/locationDataType";
+import { FC } from "react";
+import { Weather } from "../../../types/locationDataType";
 
 const { Item } = Descriptions;
 

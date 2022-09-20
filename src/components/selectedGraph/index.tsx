@@ -1,7 +1,7 @@
 import { Col, Typography } from "antd";
 import { FC } from "react";
 import { Bar, CartesianGrid, ComposedChart, XAxis, YAxis } from "recharts";
-import type { IHourlyForecast } from "../../types/locationDataType";
+import { IHourlyForecast } from "../../types/locationDataType";
 
 const { Title } = Typography;
 
