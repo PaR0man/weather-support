@@ -2,71 +2,51 @@ import { FC, useEffect, useState } from "react";
 import { Layout, Row } from "antd";
 import { SelectedGraph } from "../../selectedGraph";
 import {
-  IHourlyForecast,
   LocationCoord,
   SelectedLocationWeatherTypes,
 } from "../../../types/locationDataType";
 import { SelectedLocationWeather } from "../../selectedLocationWeather/selectedLocationWeather";
-import { fetchByСoord } from "../../../api/selectLocation";
+import { fetchByLocation, fetchByСoord } from "../../../api/selectLocation";
+import { getLocationCoords, getLocationData } from "../../../utils";
 
 const { Content } = Layout;
 
 export interface MainProps {
-  locationCoord: LocationCoord;
   locationName: string;
-  error?: string;
-  setError: (message: string) => void;
 }
 
-export const Main: FC<MainProps> = ({
-  locationName,
-  locationCoord,
-  error,
-  setError,
-}) => {
+export const Main: FC<MainProps> = ({ locationName }) => {
+  const [error, setError] = useState<string>();
+
   const [locationData, setLocationData] =
     useState<SelectedLocationWeatherTypes>();
 
-  const getLocationData = async () => {
-    const response = await fetchByСoord(locationCoord);
-    const data = await response.json();
-
-    if (data.message) {
-      return setError(data.message);
-    }
-    setError("");
-
-    setLocationData({
-      current: {
-        timezone: data?.timezone,
-        temp: Math.round(data?.current.temp),
-        feelsLike: Math.round(data?.current.feels_like),
-        humidity: data?.current.humidity,
-        weather: data?.current.weather[0].main,
-        icon: data?.current.weather[0].icon,
-        wind: data?.current.wind_speed,
-      },
-      daily: data?.daily.slice(1).map((day: any) => {
-        return {
-          date: day?.dt * 1000,
-          day: Math.round(day?.temp.day),
-          night: Math.round(day?.temp.night),
-          icon: day?.weather[0].icon,
-          weather: day?.weather[0].main,
-        };
-      }),
-      hourly: data?.hourly.map((hour: IHourlyForecast) => {
-        return {
-          temp: hour.temp,
-          dt: new Date(hour.dt * 1000).getHours(),
-        };
-      }),
-    });
+  const getData = (coords: LocationCoord) => {
+    fetchByСoord(coords).then((positionResponse) =>
+      positionResponse.json().then((locationResponse) => {
+        locationResponse.message
+          ? setError(locationResponse.message)
+          : setLocationData(getLocationData(locationResponse));
+      })
+    );
   };
 
   useEffect(() => {
-    getLocationData();
-  }, [locationCoord]);
+    window.navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+      getData(getLocationCoords(coords));
+    });
+  }, []);
+
+  useEffect(() => {
+    locationName &&
+      fetchByLocation(locationName).then((locationResponse) =>
+        locationResponse.json().then((responseData) => {
+          responseData.message
+            ? setError(responseData.message)
+            : getData(responseData.city.coord);
+        })
+      );
+  }, [locationName]);
 
   return (
     <Content className='content'>
